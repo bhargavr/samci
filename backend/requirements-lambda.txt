@@ -1,0 +1,6 @@
+# Core dependencies for Lambda deployment
+fastapi==0.115.0
+pydantic==2.9.0
+mangum==0.17.0
+
+# Note: uvicorn is NOT needed for Lambda (Mangum handles ASGI)

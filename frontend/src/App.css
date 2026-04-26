@@ -1,0 +1,162 @@
+/* SAMCI App Layout - Industrial SaaS Design */
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-primary);
+  overflow: hidden;
+}
+
+/* Header - Engineering Console Style */
+.app-header {
+  background: var(--color-steel-blue);
+  padding: calc(var(--grid-base) * 3) calc(var(--grid-base) * 4);
+  border-bottom: 2px solid var(--color-safety-orange);
+  box-shadow: var(--shadow-md);
+}
+
+.app-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: calc(var(--grid-base) * 1);
+  color: white;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--grid-base) * 2);
+}
+
+.app-header h1::before {
+  content: '■';
+  color: var(--color-safety-orange);
+  font-size: 24px;
+}
+
+.app-header p {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 40px;
+}
+
+/* Main Content Grid */
+.app-content {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  gap: calc(var(--grid-base) * 2);
+  padding: calc(var(--grid-base) * 2);
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Left Panel - Sidebar Console (Scrollable) */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--grid-base) * 2);
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  padding-right: calc(var(--grid-base) * 1);
+  padding-bottom: calc(var(--grid-base) * 2);
+}
+
+/* Right Panel - 3D Viewer (Fixed/Locked) */
+.right-panel {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-large);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Error Panel */
+.error-panel {
+  background: var(--color-bg-card);
+  border: 2px solid var(--color-sunset-red);
+  border-radius: var(--border-radius-base);
+  padding: calc(var(--grid-base) * 2);
+}
+
+.error-panel h3 {
+  color: var(--color-sunset-red);
+  margin-bottom: calc(var(--grid-base) * 1);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.error-panel p {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+/* Scrollbar - Industrial Style */
+.left-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.left-panel::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border-radius: 3px;
+}
+
+.left-panel::-webkit-scrollbar-thumb {
+  background: var(--color-concrete-gray);
+  border-radius: 3px;
+}
+
+.left-panel::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-light);
+}
+
+/* Responsive Layout */
+@media (max-width: 1200px) {
+  .app {
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
+
+  .app-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 500px;
+    overflow: visible;
+  }
+
+  .left-panel {
+    max-height: none;
+    height: auto;
+    overflow: visible;
+  }
+
+  .right-panel {
+    height: 500px;
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: calc(var(--grid-base) * 2);
+  }
+
+  .app-header h1 {
+    font-size: 24px;
+  }
+
+  .app-header p {
+    font-size: 13px;
+    margin-left: 32px;
+  }
+
+  .app-content {
+    padding: calc(var(--grid-base) * 1.5);
+    gap: calc(var(--grid-base) * 1.5);
+  }
+}

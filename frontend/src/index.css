@@ -1,0 +1,134 @@
+/* SAMCI Brand Identity - Global Styles */
+
+/* Import IBM Plex Sans font family */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+/* CSS Variables - SAMCI Brand Palette */
+:root {
+  /* Primary Colors */
+  --color-steel-blue: #1E3A5F;
+  --color-charcoal-iron: #2C3E50;
+  --color-concrete-gray: #7F8C8D;
+  --color-safety-orange: #E67E22;
+  --color-mint-efficiency: #2ECC71;
+
+  /* Extended Palette */
+  --color-steel-blue-light: #3498DB;
+  --color-sunset-red: #E74C3C;
+  --color-industrial-gray: #95A5A6;
+
+  /* UI Backgrounds */
+  --color-bg-primary: #0A1628;
+  --color-bg-secondary: #15202B;
+  --color-bg-card: #1E293B;
+  --color-bg-input: #0F1720;
+
+  /* Text Colors */
+  --color-text-primary: #E2E8F0;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #64748B;
+
+  /* Borders */
+  --color-border: #334155;
+  --color-border-light: #475569;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.5);
+
+  /* Typography */
+  --font-family-base: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Grid System */
+  --grid-base: 8px;
+  --border-radius-base: 6px;
+  --border-radius-large: 8px;
+}
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-family-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Typography Scale */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+p {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-concrete-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-light);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-safety-orange);
+  color: white;
+}
+
+::-moz-selection {
+  background: var(--color-safety-orange);
+  color: white;
+}

@@ -1,0 +1,305 @@
+/* SAMCI Steps Panel - Operational Instructions Style */
+
+.steps-panel {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-large);
+  border: 1px solid var(--color-border);
+  padding: calc(var(--grid-base) * 3);
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.steps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: calc(var(--grid-base) * 3);
+  padding-bottom: calc(var(--grid-base) * 2);
+  border-bottom: 2px solid var(--color-safety-orange);
+}
+
+.steps-header h2 {
+  color: var(--color-text-primary);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.btn-toggle-view {
+  background: var(--color-charcoal-iron);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-base);
+  padding: calc(var(--grid-base) * 1.5) calc(var(--grid-base) * 2);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-family-base);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-toggle-view:hover {
+  background: var(--color-steel-blue);
+  border-color: var(--color-steel-blue);
+}
+
+/* Current Step Display - Highlighted Console */
+.current-step {
+  background: var(--color-bg-input);
+  border: 2px solid var(--color-safety-orange);
+  border-radius: var(--border-radius-base);
+  padding: calc(var(--grid-base) * 3);
+  margin-bottom: calc(var(--grid-base) * 2);
+}
+
+.step-number {
+  color: var(--color-safety-orange);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: calc(var(--grid-base) * 1);
+}
+
+.step-description {
+  color: var(--color-text-primary);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: calc(var(--grid-base) * 2);
+}
+
+.step-details {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--grid-base) * 1);
+  padding-top: calc(var(--grid-base) * 2);
+  border-top: 1px solid var(--color-border);
+}
+
+.step-detail-item {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-family: var(--font-family-mono);
+  display: flex;
+  align-items: baseline;
+}
+
+.step-detail-item strong {
+  color: var(--color-text-muted);
+  margin-right: calc(var(--grid-base) * 1);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  min-width: 80px;
+}
+
+/* Step Controls - Navigation */
+.step-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: calc(var(--grid-base) * 2);
+  gap: calc(var(--grid-base) * 2);
+}
+
+.btn-step {
+  background: var(--color-charcoal-iron);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-base);
+  padding: calc(var(--grid-base) * 1.5) calc(var(--grid-base) * 2);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-family-base);
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-step:hover:not(:disabled) {
+  background: var(--color-steel-blue);
+  border-color: var(--color-steel-blue);
+}
+
+.btn-step:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.step-indicator {
+  color: var(--color-text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-family-mono);
+}
+
+/* Progress Bar - Engineering Style */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--color-bg-input);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: calc(var(--grid-base) * 2);
+  border: 1px solid var(--color-border);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--color-safety-orange);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(230, 126, 34, 0.5);
+}
+
+/* Steps List */
+.steps-list-section {
+  margin-top: calc(var(--grid-base) * 2);
+}
+
+.btn-toggle-list {
+  background: var(--color-bg-input);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-base);
+  padding: calc(var(--grid-base) * 1.5) calc(var(--grid-base) * 2);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-family-base);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--grid-base) * 1);
+}
+
+.btn-toggle-list:hover {
+  background: var(--color-charcoal-iron);
+  border-color: var(--color-border-light);
+}
+
+.steps-list {
+  margin-top: calc(var(--grid-base) * 2);
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: calc(var(--grid-base) * 1);
+}
+
+.step-item {
+  display: flex;
+  gap: calc(var(--grid-base) * 2);
+  padding: calc(var(--grid-base) * 2);
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-base);
+  margin-bottom: calc(var(--grid-base) * 1.5);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.step-item:hover {
+  background: var(--color-charcoal-iron);
+  border-color: var(--color-border-light);
+}
+
+.step-item.active {
+  background: var(--color-charcoal-iron);
+  border-color: var(--color-safety-orange);
+  box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.2);
+}
+
+.step-item.completed .step-item-number {
+  background: var(--color-mint-efficiency);
+  border-color: var(--color-mint-efficiency);
+}
+
+.step-item-number {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-family-mono);
+}
+
+.step-item-description {
+  flex: 1;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+  padding-top: 4px;
+}
+
+/* Final Mode Info */
+.final-mode-info {
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-base);
+  padding: calc(var(--grid-base) * 3);
+  text-align: center;
+}
+
+.final-mode-info p {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  margin-bottom: calc(var(--grid-base) * 2);
+  line-height: 1.6;
+}
+
+.final-mode-info p:last-child {
+  margin-bottom: 0;
+}
+
+.info-hint {
+  color: var(--color-text-muted) !important;
+  font-size: 13px !important;
+}
+
+/* Scrollbar */
+.steps-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.steps-list::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border-radius: 3px;
+}
+
+.steps-list::-webkit-scrollbar-thumb {
+  background: var(--color-concrete-gray);
+  border-radius: 3px;
+}
+
+.steps-list::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .steps-panel {
+    padding: calc(var(--grid-base) * 2);
+  }
+
+  .step-controls {
+    gap: calc(var(--grid-base) * 1);
+  }
+
+  .btn-step {
+    min-width: 80px;
+    padding: calc(var(--grid-base) * 1) calc(var(--grid-base) * 1.5);
+    font-size: 11px;
+  }
+}

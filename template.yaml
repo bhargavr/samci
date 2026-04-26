@@ -1,0 +1,263 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Granite Crate Packing Optimizer - Serverless Backend
+
+# Global configuration
+Globals:
+  Function:
+    Timeout: 15
+    MemorySize: 1024
+    Runtime: python3.11
+    Environment:
+      Variables:
+        POWERTOOLS_SERVICE_NAME: granite-packer
+        LOG_LEVEL: INFO
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+      AllowOrigin: "'*'"
+
+# Parameters for configuration
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - staging
+      - prod
+    Description: Deployment environment
+
+Resources:
+  # Lambda Function for Backend API
+  PackingOptimizerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub granite-packer-api-${Environment}
+      CodeUri: backend/
+      Handler: lambda_handler.handler
+      Description: FastAPI backend for container packing optimization
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          ENVIRONMENT: !Ref Environment
+      Tags:
+        Application: granite-packer
+        Environment: !Ref Environment
+      Events:
+        # Root endpoint
+        RootEndpoint:
+          Type: HttpApi
+          Properties:
+            Path: /
+            Method: GET
+            ApiId: !Ref PackingApi
+        # Optimize endpoint
+        OptimizeEndpoint:
+          Type: HttpApi
+          Properties:
+            Path: /optimize
+            Method: POST
+            ApiId: !Ref PackingApi
+        # Example endpoint
+        ExampleEndpoint:
+          Type: HttpApi
+          Properties:
+            Path: /examples/standard-container
+            Method: GET
+            ApiId: !Ref PackingApi
+        # Catch all for API routes
+        CatchAll:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+            ApiId: !Ref PackingApi
+
+  # HTTP API Gateway (cheaper than REST API)
+  PackingApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: !Ref Environment
+      Description: HTTP API for Granite Packing Optimizer
+      CorsConfiguration:
+        AllowOrigins:
+          - "*"
+        AllowHeaders:
+          - "*"
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        MaxAge: 300
+
+  # S3 Bucket for Frontend (optional - can also use existing bucket)
+  FrontendBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub granite-packer-frontend-${Environment}-${AWS::AccountId}
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      CorsConfiguration:
+        CorsRules:
+          - AllowedOrigins:
+              - "*"
+            AllowedMethods:
+              - GET
+              - HEAD
+            AllowedHeaders:
+              - "*"
+            MaxAge: 3600
+      Tags:
+        - Key: Application
+          Value: granite-packer
+        - Key: Environment
+          Value: !Ref Environment
+
+  # CloudFront Origin Access Identity
+  CloudFrontOAI:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: !Sub OAI for granite-packer-${Environment}
+
+  # S3 Bucket Policy to allow CloudFront
+  FrontendBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref FrontendBucket
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              CanonicalUser: !GetAtt CloudFrontOAI.S3CanonicalUserId
+            Action: s3:GetObject
+            Resource: !Sub ${FrontendBucket.Arn}/*
+
+  # CloudFront Distribution for Frontend
+  FrontendDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Comment: !Sub granite-packer-${Environment}
+        DefaultRootObject: index.html
+        HttpVersion: http2
+        PriceClass: PriceClass_100  # Use only North America and Europe (cheapest)
+        Origins:
+          - Id: S3Origin
+            DomainName: !GetAtt FrontendBucket.RegionalDomainName
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub origin-access-identity/cloudfront/${CloudFrontOAI}
+        DefaultCacheBehavior:
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          CachedMethods:
+            - GET
+            - HEAD
+          Compress: true
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: none
+          MinTTL: 0
+          DefaultTTL: 86400  # 1 day
+          MaxTTL: 31536000   # 1 year
+        CustomErrorResponses:
+          - ErrorCode: 403
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+          - ErrorCode: 404
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: true
+      Tags:
+        - Key: Application
+          Value: granite-packer
+        - Key: Environment
+          Value: !Ref Environment
+
+  # Optional: S3 Bucket for storing packing results
+  ResultsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub granite-packer-results-${Environment}-${AWS::AccountId}
+      LifecycleConfiguration:
+        Rules:
+          - Id: DeleteOldResults
+            Status: Enabled
+            ExpirationInDays: 7  # Auto-delete results after 7 days
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: Application
+          Value: granite-packer
+        - Key: Environment
+          Value: !Ref Environment
+
+  # CloudWatch Log Group for Lambda
+  PackingOptimizerLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/granite-packer-api-${Environment}
+      RetentionInDays: 7  # Keep logs for 7 days (cost optimization)
+
+# Outputs
+Outputs:
+  ApiUrl:
+    Description: HTTP API Gateway endpoint URL
+    Value: !Sub https://${PackingApi}.execute-api.${AWS::Region}.amazonaws.com/${Environment}
+    Export:
+      Name: !Sub ${AWS::StackName}-ApiUrl
+
+  FunctionName:
+    Description: Lambda Function Name
+    Value: !Ref PackingOptimizerFunction
+    Export:
+      Name: !Sub ${AWS::StackName}-FunctionName
+
+  FunctionArn:
+    Description: Lambda Function ARN
+    Value: !GetAtt PackingOptimizerFunction.Arn
+    Export:
+      Name: !Sub ${AWS::StackName}-FunctionArn
+
+  FrontendBucketName:
+    Description: S3 Bucket for Frontend
+    Value: !Ref FrontendBucket
+    Export:
+      Name: !Sub ${AWS::StackName}-FrontendBucket
+
+  CloudFrontDomain:
+    Description: CloudFront Distribution Domain
+    Value: !GetAtt FrontendDistribution.DomainName
+    Export:
+      Name: !Sub ${AWS::StackName}-CloudFrontDomain
+
+  CloudFrontUrl:
+    Description: CloudFront Distribution URL
+    Value: !Sub https://${FrontendDistribution.DomainName}
+    Export:
+      Name: !Sub ${AWS::StackName}-CloudFrontUrl
+
+  ResultsBucketName:
+    Description: S3 Bucket for Results
+    Value: !Ref ResultsBucket
+    Export:
+      Name: !Sub ${AWS::StackName}-ResultsBucket

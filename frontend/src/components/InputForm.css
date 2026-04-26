@@ -1,0 +1,287 @@
+/* SAMCI Input Form - Engineering Console Style */
+
+.input-form {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-large);
+  border: 1px solid var(--color-border);
+  padding: calc(var(--grid-base) * 3);
+  box-shadow: var(--shadow-md);
+  max-width: 100%;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+/* Form Header */
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: calc(var(--grid-base) * 3);
+  padding-bottom: calc(var(--grid-base) * 2);
+  border-bottom: 2px solid var(--color-safety-orange);
+}
+
+.form-header h2 {
+  color: var(--color-text-primary);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Form Sections */
+.form-section {
+  margin-bottom: calc(var(--grid-base) * 3);
+  padding-bottom: calc(var(--grid-base) * 3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.form-section h3 {
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: calc(var(--grid-base) * 2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 13px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: calc(var(--grid-base) * 2);
+}
+
+/* Form Grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: calc(var(--grid-base) * 2);
+  min-width: 0;
+}
+
+.form-grid-small {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(var(--grid-base) * 2);
+  min-width: 0;
+}
+
+/* Form Fields */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.form-field label {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  margin-bottom: calc(var(--grid-base) * 1);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-field input {
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-base);
+  padding: calc(var(--grid-base) * 1.5);
+  color: var(--color-text-primary);
+  font-size: 14px;
+  font-family: var(--font-family-base);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.form-field input:focus {
+  outline: none;
+  border-color: var(--color-steel-blue);
+  box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.2);
+}
+
+.form-field input:hover {
+  border-color: var(--color-border-light);
+}
+
+.form-field input[type="number"] {
+  /* Remove spinner arrows for cleaner look */
+  -moz-appearance: textfield;
+}
+
+.form-field input[type="number"]::-webkit-outer-spin-button,
+.form-field input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-field small {
+  color: var(--color-text-muted);
+  font-size: 11px;
+  margin-top: calc(var(--grid-base) * 1);
+  line-height: 1.4;
+}
+
+/* Checkbox Field */
+.form-field-checkbox {
+  margin-top: calc(var(--grid-base) * 2);
+}
+
+.form-field-checkbox label {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.form-field-checkbox input[type='checkbox'] {
+  margin-right: calc(var(--grid-base) * 1.5);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-safety-orange);
+}
+
+/* Crate Card */
+.crate-card {
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-base);
+  padding: calc(var(--grid-base) * 2);
+  margin-bottom: calc(var(--grid-base) * 2);
+  transition: border-color 0.2s;
+}
+
+.crate-card:hover {
+  border-color: var(--color-border-light);
+}
+
+.crate-card:last-child {
+  margin-bottom: 0;
+}
+
+.crate-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: calc(var(--grid-base) * 2);
+}
+
+.crate-id-input {
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  padding: calc(var(--grid-base) * 1);
+  flex: 1;
+  font-family: var(--font-family-base);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.crate-id-input:focus {
+  outline: none;
+  background: var(--color-bg-card);
+  border-radius: 4px;
+}
+
+/* Buttons - Industrial SaaS Style */
+.btn-primary,
+.btn-secondary,
+.btn-add,
+.btn-remove {
+  border: none;
+  border-radius: var(--border-radius-base);
+  padding: calc(var(--grid-base) * 1.5) calc(var(--grid-base) * 3);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-family-base);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-primary {
+  background: var(--color-safety-orange);
+  color: white;
+  width: 100%;
+  padding: calc(var(--grid-base) * 2);
+  font-size: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #D35400;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--color-charcoal-iron);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  background: var(--color-steel-blue);
+  border-color: var(--color-steel-blue);
+}
+
+.btn-add {
+  background: var(--color-mint-efficiency);
+  color: white;
+  padding: calc(var(--grid-base) * 1) calc(var(--grid-base) * 2);
+  font-size: 12px;
+}
+
+.btn-add:hover {
+  background: #27AE60;
+}
+
+.btn-remove {
+  background: var(--color-sunset-red);
+  color: white;
+  padding: calc(var(--grid-base) * 1);
+  font-size: 14px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-remove:hover {
+  background: #C0392B;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .form-grid,
+  .form-grid-small {
+    grid-template-columns: 1fr;
+  }
+
+  .input-form {
+    padding: calc(var(--grid-base) * 2);
+  }
+}
