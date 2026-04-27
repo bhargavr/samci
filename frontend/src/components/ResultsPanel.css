@@ -1,185 +1,179 @@
-/* SAMCI Results Panel - Data Dashboard Style */
+/* SAMCI Results Panel — Brand Identity */
 
 .results-panel {
-  background: var(--color-bg-card);
-  border-radius: var(--border-radius-large);
+  background: var(--color-white);
   border: 1px solid var(--color-border);
-  padding: calc(var(--grid-base) * 3);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
   flex-shrink: 0;
 }
 
 .results-panel h2 {
-  color: var(--color-text-primary);
-  font-size: 20px;
+  font-family: var(--font-mono);
+  font-size: 9px;
   font-weight: 600;
-  margin-bottom: calc(var(--grid-base) * 3);
-  padding-bottom: calc(var(--grid-base) * 2);
-  border-bottom: 2px solid var(--color-safety-orange);
-  letter-spacing: -0.01em;
+  color: var(--color-steel);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+  line-height: 1;
 }
 
 .results-panel h3 {
-  color: var(--color-text-primary);
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 9px;
   font-weight: 600;
-  margin-bottom: calc(var(--grid-base) * 2);
+  color: var(--color-steel);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  line-height: 1;
 }
 
-/* Metrics Grid - Engineering Dashboard */
+/* Metrics Grid */
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: calc(var(--grid-base) * 2);
-  margin-bottom: calc(var(--grid-base) * 3);
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 .metric-card {
-  background: var(--color-bg-input);
+  background: var(--color-offwhite);
   border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-base);
-  padding: calc(var(--grid-base) * 2);
-  text-align: center;
-  transition: border-color 0.2s;
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  transition: border-color 0.15s;
 }
 
-.metric-card:hover {
-  border-color: var(--color-border-light);
-}
+.metric-card:hover { border-color: var(--color-slate); }
 
 .metric-label {
-  color: var(--color-text-muted);
-  font-size: 11px;
-  margin-bottom: calc(var(--grid-base) * 1);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: 9px;
   font-weight: 500;
+  color: var(--color-steel);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
 }
 
 .metric-value {
-  color: var(--color-text-primary);
-  font-size: 32px;
+  font-family: var(--font-mono);
+  font-size: 24px;
   font-weight: 700;
-  line-height: 1;
-  font-family: var(--font-family-base);
-  letter-spacing: -0.02em;
+  color: var(--color-navy);
+  line-height: 1.1;
 }
+
+/* Utilization metric accent */
+.metric-card:first-child .metric-value { color: var(--color-orange); }
 
 /* Distribution Section */
 .distribution-section {
-  background: var(--color-bg-input);
+  background: var(--color-offwhite);
   border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-base);
-  padding: calc(var(--grid-base) * 2);
-  margin-bottom: calc(var(--grid-base) * 3);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-bottom: 14px;
 }
 
 .distribution-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: calc(var(--grid-base) * 1.5);
-  margin-top: calc(var(--grid-base) * 2);
+  gap: 6px;
+  margin-top: 10px;
 }
 
 .distribution-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: calc(var(--grid-base) * 1.5);
-  background: var(--color-bg-card);
+  padding: 8px 10px;
+  background: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 .distribution-label {
-  color: var(--color-text-secondary);
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: 9px;
   font-weight: 500;
+  color: var(--color-steel);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.5px;
 }
 
 .distribution-value {
-  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 600;
-  font-size: 14px;
-  font-family: var(--font-family-mono);
+  color: var(--color-navy);
 }
 
-/* Unpacked Section - Alert Style */
+/* Unpacked Section */
 .unpacked-section {
-  background: var(--color-bg-card);
-  border: 2px solid var(--color-sunset-red);
-  border-radius: var(--border-radius-base);
-  padding: calc(var(--grid-base) * 2);
-  margin-bottom: calc(var(--grid-base) * 3);
+  background: #FFF0EE;
+  border: 1.5px solid var(--color-error);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-bottom: 14px;
 }
 
-.unpacked-section h3 {
-  color: var(--color-sunset-red);
-}
+.unpacked-section h3 { color: var(--color-error); }
 
 .unpacked-list {
   display: flex;
   flex-wrap: wrap;
-  gap: calc(var(--grid-base) * 1);
-  margin-top: calc(var(--grid-base) * 2);
+  gap: 6px;
+  margin-top: 8px;
 }
 
 .unpacked-item {
-  background: var(--color-bg-input);
-  color: var(--color-text-primary);
-  padding: calc(var(--grid-base) * 1) calc(var(--grid-base) * 1.5);
-  border-radius: 4px;
-  font-size: 12px;
-  border: 1px solid var(--color-sunset-red);
-  font-family: var(--font-family-mono);
+  padding: 3px 8px;
+  background: var(--color-white);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-error);
 }
 
 /* Warnings Section */
 .warnings-section {
-  background: var(--color-bg-card);
-  border: 2px solid var(--color-safety-orange);
-  border-radius: var(--border-radius-base);
-  padding: calc(var(--grid-base) * 2);
+  background: #FFF4E8;
+  border: 1.5px solid var(--color-orange);
+  border-radius: var(--radius-sm);
+  padding: 12px;
 }
 
-.warnings-section h3 {
-  color: var(--color-safety-orange);
-}
+.warnings-section h3 { color: var(--color-orange); }
 
 .warnings-list {
   margin: 0;
-  padding-left: calc(var(--grid-base) * 3);
-  color: var(--color-text-secondary);
-  font-size: 13px;
-  margin-top: calc(var(--grid-base) * 2);
+  padding-left: 16px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .warnings-list li {
-  margin-bottom: calc(var(--grid-base) * 1.5);
-  line-height: 1.6;
-}
-
-.warnings-list li:last-child {
-  margin-bottom: 0;
+  font-size: 11px;
+  color: var(--color-steel);
+  line-height: 1.5;
 }
 
 .warning-critical {
-  color: var(--color-sunset-red) !important;
+  color: var(--color-error) !important;
   font-weight: 600;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .metrics-grid,
-  .distribution-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .results-panel {
-    padding: calc(var(--grid-base) * 2);
-  }
+  .distribution-grid { grid-template-columns: 1fr; }
+  .results-panel { padding: 14px; }
 }

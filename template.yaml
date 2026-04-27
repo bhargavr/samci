@@ -7,7 +7,7 @@ Globals:
   Function:
     Timeout: 15
     MemorySize: 1024
-    Runtime: python3.11
+    Runtime: python3.12
     Environment:
       Variables:
         POWERTOOLS_SERVICE_NAME: granite-packer
@@ -97,7 +97,7 @@ Resources:
   FrontendBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub granite-packer-frontend-${Environment}-${AWS::AccountId}
+      BucketName: !Sub granite-packer-frontend-${Environment}-${AWS::Region}-${AWS::AccountId}
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: index.html
@@ -151,7 +151,7 @@ Resources:
         Comment: !Sub granite-packer-${Environment}
         DefaultRootObject: index.html
         HttpVersion: http2
-        PriceClass: PriceClass_100  # Use only North America and Europe (cheapest)
+        PriceClass: PriceClass_200  # North America, Europe, and Asia Pacific
         Origins:
           - Id: S3Origin
             DomainName: !GetAtt FrontendBucket.RegionalDomainName
@@ -194,7 +194,7 @@ Resources:
   ResultsBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub granite-packer-results-${Environment}-${AWS::AccountId}
+      BucketName: !Sub granite-packer-results-${Environment}-${AWS::Region}-${AWS::AccountId}
       LifecycleConfiguration:
         Rules:
           - Id: DeleteOldResults

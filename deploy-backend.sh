@@ -70,7 +70,6 @@ echo "Building SAM application..."
 echo "=========================================="
 
 sam build \
-    --use-container \
     --cached \
     --parallel
 
@@ -113,20 +112,15 @@ echo "=========================================="
 echo "Deployment Outputs"
 echo "=========================================="
 
-API_URL=$(aws cloudformation describe-stacks \
+STACK_OUTPUTS=$(aws cloudformation describe-stacks \
     --stack-name granite-packer-stack \
-    --query "Stacks[0].Outputs[?OutputKey=='ApiUrl'].OutputValue" \
-    --output text)
+    --region ap-south-1 \
+    --query "Stacks[0].Outputs" \
+    --output json)
 
-FUNCTION_NAME=$(aws cloudformation describe-stacks \
-    --stack-name granite-packer-stack \
-    --query "Stacks[0].Outputs[?OutputKey=='FunctionName'].OutputValue" \
-    --output text)
-
-CLOUDFRONT_URL=$(aws cloudformation describe-stacks \
-    --stack-name granite-packer-stack \
-    --query "Stacks[0].Outputs[?OutputKey=='CloudFrontUrl'].OutputValue" \
-    --output text)
+API_URL=$(echo "$STACK_OUTPUTS" | python3 -c "import sys,json; o={x['OutputKey']:x['OutputValue'] for x in json.load(sys.stdin)}; print(o.get('ApiUrl',''))")
+FUNCTION_NAME=$(echo "$STACK_OUTPUTS" | python3 -c "import sys,json; o={x['OutputKey']:x['OutputValue'] for x in json.load(sys.stdin)}; print(o.get('FunctionName',''))")
+CLOUDFRONT_URL=$(echo "$STACK_OUTPUTS" | python3 -c "import sys,json; o={x['OutputKey']:x['OutputValue'] for x in json.load(sys.stdin)}; print(o.get('CloudFrontUrl',''))")
 
 echo ""
 echo -e "${GREEN}API Endpoint:${NC} ${API_URL}"
@@ -154,7 +148,7 @@ echo "Saving outputs to deployment-outputs.json..."
 aws cloudformation describe-stacks \
     --stack-name granite-packer-stack \
     --query "Stacks[0].Outputs" \
-    --output json > deployment-outputs.json
+    --output json --region ap-south-1 > deployment-outputs.json
 
 echo -e "${GREEN}✓ Outputs saved to deployment-outputs.json${NC}"
 

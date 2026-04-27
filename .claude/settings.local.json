@@ -2,7 +2,32 @@
   "permissions": {
     "allow": [
       "Bash(chmod +x *)",
-      "Bash(python3 -m venv venv)"
+      "Bash(python3 -m venv venv)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(cp \"/Users/bhargavreddy/.claude/projects/-Users-bhargavreddy-Documents-Bhargav-workspace-samci/0a9c1a15-72fd-4a1e-999b-f6beaca8b8a1/tool-results/webfetch-1777245995305-ko3wzi.bin\" /tmp/design.gz)",
+      "Bash(gunzip -f /tmp/design.gz)",
+      "Read(//tmp/**)",
+      "Bash(mkdir -p /tmp/design_extracted)",
+      "Bash(tar -xf /tmp/design -C /tmp/design_extracted)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5174/)",
+      "Bash(npm install *)",
+      "Bash(curl -s http://localhost:5174/)",
+      "Bash(curl -s \"http://localhost:5174/src/App.jsx\")",
+      "Bash(aws cloudformation describe-stacks *)",
+      "Bash(aws cloudformation *)",
+      "Bash(python3 -c ' *)",
+      "Bash(aws s3 *)",
+      "Bash(aws s3api *)",
+      "Bash(aws lambda *)",
+      "Bash(aws apigatewayv2 *)",
+      "Bash(aws logs *)",
+      "Bash(curl -s \"https://vanw2lhu20.execute-api.ap-south-1.amazonaws.com/dev/\")",
+      "Bash(curl -s https://vanw2lhu20.execute-api.ap-south-1.amazonaws.com/dev/optimize -X POST -H 'Content-Type: application/json' -d '{\"container\":{\"length\":5898,\"width\":2352,\"height\":2393,\"max_weight\":28000},\"crates\":[]}')",
+      "Bash(curl -s https://vanw2lhu20.execute-api.ap-south-1.amazonaws.com/dev/)",
+      "Bash(curl -s https://vanw2lhu20.execute-api.ap-south-1.amazonaws.com/dev/examples/standard-container)",
+      "Bash(curl -s -X POST https://vanw2lhu20.execute-api.ap-south-1.amazonaws.com/dev/optimize -H 'Content-Type: application/json' -d '{\"container\":{\"length\":5898,\"width\":2352,\"height\":2393,\"max_weight\":28000},\"crates\":[{\"id\":\"Test\",\"length\":500,\"width\":400,\"height\":300,\"weight\":200,\"quantity\":2,\"max_stack\":2,\"can_rotate\":true}]}')",
+      "Bash(./deploy-frontend.sh)"
     ]
   }
 }

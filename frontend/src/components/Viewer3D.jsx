@@ -5,14 +5,14 @@ import './Viewer3D.css'
 
 // SAMCI Brand Color Palette for Crate Types
 const CRATE_COLORS = [
-  '#E67E22', // Safety Orange (Primary)
-  '#3498DB', // Steel Blue Light
-  '#2ECC71', // Mint Efficiency
-  '#E74C3C', // Sunset Red
-  '#95A5A6', // Industrial Gray
-  '#1E3A5F', // Steel Blue (Dark)
-  '#F39C12', // Industrial Yellow
-  '#16A085', // Teal Accent
+  '#E07828', // Orange — primary accent
+  '#0D1F35', // Navy — brand primary
+  '#5A6A7E', // Steel — secondary
+  '#2E9E6B', // Success green
+  '#A8B4C2', // Slate — muted
+  '#1A3252', // Navy dark
+  '#C86A20', // Orange dark
+  '#3D7A5E', // Green dark
 ]
 
 const getCrateColor = (crateId) => {

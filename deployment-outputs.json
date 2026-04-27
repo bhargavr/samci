@@ -1,0 +1,44 @@
+[
+    {
+        "OutputKey": "ResultsBucketName",
+        "OutputValue": "granite-packer-results-dev-ap-south-1-368932947801",
+        "Description": "S3 Bucket for Results",
+        "ExportName": "granite-packer-stack-ResultsBucket"
+    },
+    {
+        "OutputKey": "FunctionName",
+        "OutputValue": "granite-packer-api-dev",
+        "Description": "Lambda Function Name",
+        "ExportName": "granite-packer-stack-FunctionName"
+    },
+    {
+        "OutputKey": "FunctionArn",
+        "OutputValue": "arn:aws:lambda:ap-south-1:368932947801:function:granite-packer-api-dev",
+        "Description": "Lambda Function ARN",
+        "ExportName": "granite-packer-stack-FunctionArn"
+    },
+    {
+        "OutputKey": "ApiUrl",
+        "OutputValue": "https://vanw2lhu20.execute-api.ap-south-1.amazonaws.com/dev",
+        "Description": "HTTP API Gateway endpoint URL",
+        "ExportName": "granite-packer-stack-ApiUrl"
+    },
+    {
+        "OutputKey": "CloudFrontUrl",
+        "OutputValue": "https://d1sg7hhbnmx6o7.cloudfront.net",
+        "Description": "CloudFront Distribution URL",
+        "ExportName": "granite-packer-stack-CloudFrontUrl"
+    },
+    {
+        "OutputKey": "FrontendBucketName",
+        "OutputValue": "granite-packer-frontend-dev-ap-south-1-368932947801",
+        "Description": "S3 Bucket for Frontend",
+        "ExportName": "granite-packer-stack-FrontendBucket"
+    },
+    {
+        "OutputKey": "CloudFrontDomain",
+        "OutputValue": "d1sg7hhbnmx6o7.cloudfront.net",
+        "Description": "CloudFront Distribution Domain",
+        "ExportName": "granite-packer-stack-CloudFrontDomain"
+    }
+]

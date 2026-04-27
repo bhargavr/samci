@@ -5,7 +5,7 @@ version = 0.1
 [default.deploy.parameters]
 stack_name = "granite-packer-stack"
 s3_prefix = "granite-packer"
-region = "us-east-1"
+region = "ap-south-1"
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = "Environment=dev"
 confirm_changeset = true

@@ -34,25 +34,19 @@ echo -e "${GREEN}✓ Prerequisites check passed${NC}"
 echo ""
 echo "Fetching CloudFormation stack outputs..."
 
-BUCKET_NAME=$(aws cloudformation describe-stacks \
+STACK_OUTPUTS=$(aws cloudformation describe-stacks \
     --stack-name granite-packer-stack \
-    --query "Stacks[0].Outputs[?OutputKey=='FrontendBucketName'].OutputValue" \
-    --output text)
+    --region ap-south-1 \
+    --query "Stacks[0].Outputs" \
+    --output json)
 
-CLOUDFRONT_ID=$(aws cloudformation describe-stacks \
-    --stack-name granite-packer-stack \
-    --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDomain'].OutputValue" \
-    --output text | cut -d'.' -f1)
+BUCKET_NAME=$(echo "$STACK_OUTPUTS" | python3 -c "import sys,json; o={x['OutputKey']:x['OutputValue'] for x in json.load(sys.stdin)}; print(o.get('FrontendBucketName',''))")
+CLOUDFRONT_URL=$(echo "$STACK_OUTPUTS" | python3 -c "import sys,json; o={x['OutputKey']:x['OutputValue'] for x in json.load(sys.stdin)}; print(o.get('CloudFrontUrl',''))")
+API_URL=$(echo "$STACK_OUTPUTS" | python3 -c "import sys,json; o={x['OutputKey']:x['OutputValue'] for x in json.load(sys.stdin)}; print(o.get('ApiUrl',''))")
 
-CLOUDFRONT_URL=$(aws cloudformation describe-stacks \
-    --stack-name granite-packer-stack \
-    --query "Stacks[0].Outputs[?OutputKey=='CloudFrontUrl'].OutputValue" \
-    --output text)
-
-API_URL=$(aws cloudformation describe-stacks \
-    --stack-name granite-packer-stack \
-    --query "Stacks[0].Outputs[?OutputKey=='ApiUrl'].OutputValue" \
-    --output text)
+CLOUDFRONT_ID=$(aws cloudfront list-distributions \
+    --query "DistributionList.Items[?DomainName==\`$(echo $CLOUDFRONT_URL | sed 's|https://||')\`].Id" \
+    --output text 2>/dev/null || echo "")
 
 if [ -z "$BUCKET_NAME" ]; then
     echo -e "${RED}ERROR: Could not find S3 bucket. Deploy backend first.${NC}"
